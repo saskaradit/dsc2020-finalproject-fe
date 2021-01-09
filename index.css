@@ -1,0 +1,38 @@
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+a{
+  color: orange;
+  text-decoration: none;
+}
+a:hover{
+  filter: brightness(0.8);
+}
+/* nav */
+ul{
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+ul h1{
+  padding: 0;
+}
+li{
+  padding: 1rem;
+  color: orange;
+}
+.navbar{
+  height: 100%;
+  background-color: #333;
+}
+/* Hero */
+.hero{
+  text-align: center;
+  padding: 2rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
