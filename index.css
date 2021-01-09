@@ -2,10 +2,9 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: 'Open Sans', sans-serif;
 }
-.container{
-  height: 100vh;
-}
+
 a{
   color: orange;
   text-decoration: none;
@@ -22,6 +21,7 @@ a:hover{
   justify-content: space-between;
   align-items: center;
   padding: 0 1rem;
+  width: 100%;
 }
 .navbar ul{
   list-style: none;
@@ -31,11 +31,8 @@ a:hover{
 .navbar p{
   color: #f4f4f4;
 }
-ul h1{
-  padding: 0;
-}
 li{
-  padding: 1rem;
+  padding-right: 1rem;
   color: orange;
 }
 /* Hero */
@@ -43,6 +40,7 @@ li{
   text-align: center;
   padding: 2rem;
   margin-top: 2rem;
+  margin: auto;
   margin-bottom: 1rem;
 }
 
@@ -57,4 +55,82 @@ li{
 }
 .hero-box h3{
   font-size: 2rem;
+}
+
+/* Second Hero */
+.second-hero{
+  padding: 2rem;
+  display: flex;
+  margin: auto;
+  width: 50%;
+  justify-content: center;
+  align-items: center;
+}
+.second-hero h4{
+  font-size: 1.5rem;
+}
+.hero-box-2{
+  text-align: center;
+  margin: auto;
+  width: 20%;
+  min-width: fit-content;
+  padding: 2rem;
+  background-color: teal;
+  border-radius: 5px;
+  box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Province */
+.province-container{
+  display: grid;
+  justify-items: stretch;
+  grid-template-columns: repeat( 2, minmax(250px, 1fr) );
+  margin-top: 3rem;
+  /* align-items: center; */
+}
+
+.province-num{
+  float: left;
+  top: 0px;
+}
+
+.province-box{
+  text-align: center;
+  background-color: #f3f3f3;
+  padding: 1rem;
+  margin: 1rem;
+  border-radius: 5px;
+  box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.4);
+}
+.prov-minibox{
+  display: grid;
+  margin-top: 1rem;
+  margin: auto;
+  font-size: 1.5rem;
+  grid-template-columns: 1fr 1fr;
+}
+.prov-minibox h6:nth-child(odd){
+  text-align: right;
+  padding-right: 1rem;
+}
+.prov-minibox h6:nth-child(even){
+  text-align: left;
+  padding-left: 1rem;
+}
+
+@media screen and (max-width:400px){
+  .navbar{
+    height: 50px;
+    font-size: 10px;
+    padding: 0 0.5rem;
+  }
+  ul h1{
+    font-size: 12px
+  }
+  .province-container{
+    grid-template-columns: 1fr;
+  }
+  .prov-minibox{
+    font-size: 1rem;
+  }
 }
