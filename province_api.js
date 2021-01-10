@@ -1,3 +1,4 @@
+const provinceContainer = document.getElementById('province-container')
 
 var errorCounter = 0;
 
@@ -7,41 +8,54 @@ async function getProvinceStats() {
   try {
     const response = await fetch(apiUrl);
     const data = await response.json();
-    // var datajson = JSON.parse();
-
     console.log(data.data);
-    // console.log(datajson);
-    // removeLoadingSpinner();
 
     data.data.forEach(obj => {
-      console.log(obj.fid)
-      // createElements(obj);
+      var index = data.data.indexOf(obj);
+      createElements(obj,index+1);
     });
   } catch (error) {
-    if(errorCounter<10){
-      errorCounter+=1;
-      // getQuote();
-    }
-    else alert('Something is Wrong')
+    alert('Something is Wrong')
   }
 }
 
-function createElements(obj) {
+function createElements(obj,index) {
   const mainDiv = document.createElement('div');
-  mainDiv.classList.add('blog-post');
+  mainDiv.classList.add('province-box');
   const title = document.createElement('h3');
-  title.classList.add('blog-title');
-  title.innerHTML = obj['provinsi'];
-  // const text = document.createElement('p');
-  // text.classList.add('blog-text');
-  // text.innerHTML = obj['text'];
-  // const date = document.createElement('div');
-  // date.classList.add('blog-date');
-  // date.innerHTML = obj['date'];
+  const provinceNum = document.createElement('h3');
+  provinceNum.classList.add('province-num');
+  provinceNum.innerText = '#'+index
+  const minibox = document.createElement('div');
+  minibox.classList.add('prov-minibox');
+
+  const positiveNum = document.createElement('h6');
+  const positive = document.createElement('h6');
+  positiveNum.innerText = obj.kasusPosi
+  positive.innerText = 'Positive'
+  
+  const recoveredNum = document.createElement('h6');
+  const recovered = document.createElement('h6');
+  recoveredNum.innerText = obj.kasusSemb
+  recovered.innerText = 'Recovered'
+
+  const deathNum = document.createElement('h6');
+  const death = document.createElement('h6');
+  deathNum.innerText = obj.kasusMeni
+  death.innerText = 'Recovered'
+  minibox.appendChild(positiveNum)
+  minibox.appendChild(positive)
+  minibox.appendChild(recoveredNum)
+  minibox.appendChild(recovered)
+  minibox.appendChild(deathNum)
+  minibox.appendChild(death)
+
+  title.innerText = obj.provinsi;
   mainDiv.appendChild(title);
-  // mainDiv.appendChild(text);
-  // mainDiv.appendChild(date);
-  document.querySelector('body').appendChild(mainDiv);
+  mainDiv.appendChild(provinceNum)
+  mainDiv.appendChild(minibox);
+  provinceContainer.appendChild(mainDiv);
+  // document.querySelector('body').appendChild(mainDiv);
 }
 
 getProvinceStats();
