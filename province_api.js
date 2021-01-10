@@ -1,13 +1,15 @@
 const provinceContainer = document.getElementById('province-container')
-
+const inputBox = document.querySelector('.search-box');
+inputBox.value =""
 var errorCounter = 0;
+var data;
 
 async function getProvinceStats() {
   // showLoadingSpinner();
   const apiUrl = 'https://indonesia-covid-19.mathdro.id/api/provinsi'
   try {
     const response = await fetch(apiUrl);
-    const data = await response.json();
+    data = await response.json();
     console.log(data.data);
 
     data.data.forEach(obj => {
@@ -23,6 +25,7 @@ function createElements(obj,index) {
   const mainDiv = document.createElement('div');
   mainDiv.classList.add('province-box');
   const title = document.createElement('h3');
+  title.classList.add('province-title')
   const provinceNum = document.createElement('h3');
   provinceNum.classList.add('province-num');
   provinceNum.innerText = '#'+index
@@ -55,7 +58,23 @@ function createElements(obj,index) {
   mainDiv.appendChild(provinceNum)
   mainDiv.appendChild(minibox);
   provinceContainer.appendChild(mainDiv);
-  // document.querySelector('body').appendChild(mainDiv);
 }
+
+function filterSearch() {
+  var filter, a, i, txtValue;
+  filter = inputBox.value.toUpperCase();
+  items = document.querySelectorAll('.province-title')
+  nodes = Array.prototype.slice.call(items);
+  data2 = data.data.filter(stats => stats.provinsi.toUpperCase().includes(filter))
+  // console.log(data2[0].provinsi)
+  provinceContainer.innerHTML = ""
+  data2.forEach(obj => {
+    var index = data.data.indexOf(obj);
+    createElements(obj,index+1);
+  });
+  // createElements(data2,1)
+}
+
+// filterSearch();
 
 getProvinceStats();
