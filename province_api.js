@@ -1,21 +1,33 @@
+const pageContainer = document.getElementById('container')
 const provinceContainer = document.getElementById('province-container')
 const inputBox = document.querySelector('.search-box');
 inputBox.value =""
 var errorCounter = 0;
 var data;
 
+function showLoadingSpinner(){
+  loader.hidden = false;
+  pageContainer.hidden = true;
+}
+function removeLoadingSpinner(){
+  if(!loader.hidden){
+    pageContainer.hidden = false;
+    loader.hidden = true;
+  }
+}
+
 async function getProvinceStats() {
-  // showLoadingSpinner();
+  showLoadingSpinner();
   const apiUrl = 'https://indonesia-covid-19.mathdro.id/api/provinsi'
   try {
     const response = await fetch(apiUrl);
     data = await response.json();
-    console.log(data.data);
 
     data.data.forEach(obj => {
       var index = data.data.indexOf(obj);
       createElements(obj,index+1);
     });
+    removeLoadingSpinner();
   } catch (error) {
     alert('Something is Wrong')
   }
@@ -66,15 +78,11 @@ function filterSearch() {
   items = document.querySelectorAll('.province-title')
   nodes = Array.prototype.slice.call(items);
   data2 = data.data.filter(stats => stats.provinsi.toUpperCase().includes(filter))
-  // console.log(data2[0].provinsi)
   provinceContainer.innerHTML = ""
   data2.forEach(obj => {
     var index = data.data.indexOf(obj);
     createElements(obj,index+1);
   });
-  // createElements(data2,1)
 }
-
-// filterSearch();
 
 getProvinceStats();
